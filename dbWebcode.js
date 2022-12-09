@@ -9,7 +9,7 @@ var userSchema = new mongoose.Schema({
     },
     batch:{type:'string',require:true},
     webcodeTask:{type:'string',require:true},
-     webcodeSolution:{type:'string',default:"Yet to submit"},
+    webcodeSolution:{type:'string',default:"Yet to submit"},
     marks:{type:'string',default:"Yet to Give"},
     createdAt:{type:Date,default:Date.now()}
 })

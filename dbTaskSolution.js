@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
     batch:{type:'string',require:true},
      task:{type:'string',require:true},
     taskSolution:{type:'string',require:true},
-    marks:{type:Number,default:"Yet to Give"},
+    marks:{type:'string',default:"Yet to Give"},
     createdAt:{type:Date,default:Date.now()}
 })
 

@@ -9,6 +9,8 @@ var taskRouter = require("./routes/task");
 var InterviewRouter = require("./routes/interview");
 var taskSolutionRouter = require("./routes/taskSolution");
 var webcodeRouter = require("./routes/webcode");
+var queryRouter = require("./routes/query");
+var classRouter = require("./routes/class");
 const {dbUrl} = require("./dbConfig");
 const { mongoose } = require("mongoose");
 
@@ -45,6 +47,8 @@ app.use("/task", taskRouter);
 app.use("/taskSolution", taskSolutionRouter);
 app.use("/interview", InterviewRouter);
 app.use("/webcode", webcodeRouter);
+app.use("/query", queryRouter);
+app.use("/class", classRouter);
 
 
 app.use(express.urlencoded({extended:false}))
