@@ -182,29 +182,6 @@ console.log(email)
     })
   }
   })
- 
-
-    // router.get("/adminRoleAuth", async (req, res,next) => {
-    //   let email1 =emailStorageAdmin[(emailStorageAdmin.length)-1]
-    //   console.log(email1)
-    //   await client.connect();
-    // try{
-    //   const db = client.db(dbName);
-    //   let user = await db.collection("users").findOne({email:email1});
-    //   console.log(user)
-    //   let roleVerify =user.role
-    //   console.log(roleVerify)
-    //   res.send({
-    //     statusCode:200,
-    //     data:roleVerify
-    //   })
-    // }
-    // catch(error){
-    //   console.log(error);
-    //     res.sendStatus(500);
-    // }
-  
-    //   })
 
     router.get('/getRole/:email',async(req,res)=>{
       const { email } = req.params;
@@ -239,5 +216,175 @@ console.log(error);
 res.send({ statusCode: 401, message: "Internal Server Error", error });
 }
  })
+
+ router.get('/getCoData',async(req,res)=>{
+
+  try {
+    let users = await usersModel.find({role: "Cordinator"})
+    res.send({
+      statusCode:200,
+      data:users
+    })
+} catch (error) {
+console.log(error);
+res.send({ statusCode: 401, message: "Internal Server Error", error });
+}
+ })
+
+ router.get('/getStuData',async(req,res)=>{
+
+  try {
+    let users = await usersModel.find({role: "Student"})
+    res.send({
+      statusCode:200,
+      data:users
+    })
+} catch (error) {
+console.log(error);
+res.send({ statusCode: 401, message: "Internal Server Error", error });
+}
+ })
+
+ router.get('/getTeachData',async(req,res)=>{
+
+  try {
+    let users = await usersModel.find({role: "Teacher"})
+    res.send({
+      statusCode:200,
+      data:users
+    })
+} catch (error) {
+console.log(error);
+res.send({ statusCode: 401, message: "Internal Server Error", error });
+}
+ })
+
+
+ //Update student by Cordi
+ router.get('/getUpStuData/:id',async(req,res)=>{
+  try {
+    let user = await usersModel.findOne({_id:mongodb.ObjectId(req.params.id)})
+    // console.log(user)
+    if(user)
+    {
+      
+      res.send(user)
+      }
+    else
+      res.send({statusCode:400,message:"User does not exists"})
+  } catch (error) {
+    console.log(error)
+    res.send({statusCode:400,message:"Internal Server Error",error})
+  }
+})
+
+router.put('/updateStu/:id',async(req,res)=>{
+  try {
+    let user = await usersModel.findOne({_id:mongodb.ObjectId(req.params.id)})
+    // console.log(user)
+    if(user)
+    {   
+       user.firstName =req.body.firstName
+      user.lastName =req.body.lastName
+      user.mobileNumber =req.body.mobileNumber
+      user.role =req.body.role
+      user.email =req.body.email
+      user.batch =req.body.batch
+
+      await user.save()
+      res.send({statusCode:200,message:"User data saved successfully"})
+      }
+    else
+      res.send({statusCode:400,message:"User does not exists"})
+  } catch (error) {
+    console.log(error)
+    res.send({statusCode:400,message:"Internal Server Error",error})
+  }
+})
+
+ //Update Teacher by Cordi
+ router.get('/getUpTeachData/:id',async(req,res)=>{
+  try {
+    let user = await usersModel.findOne({_id:mongodb.ObjectId(req.params.id)})
+    // console.log(user)
+    if(user)
+    {
+      
+      res.send(user)
+      }
+    else
+      res.send({statusCode:400,message:"User does not exists"})
+  } catch (error) {
+    console.log(error)
+    res.send({statusCode:400,message:"Internal Server Error",error})
+  }
+})
+
+router.put('/updateTeach/:id',async(req,res)=>{
+  try {
+    let user = await usersModel.findOne({_id:mongodb.ObjectId(req.params.id)})
+    // console.log(user)
+    if(user)
+    {   
+       user.firstName =req.body.firstName
+      user.lastName =req.body.lastName
+      user.mobileNumber =req.body.mobileNumber
+      user.role =req.body.role
+      user.email =req.body.email
+      user.batch =req.body.batch
+
+      await user.save()
+      res.send({statusCode:200,message:"User data saved successfully"})
+      }
+    else
+      res.send({statusCode:400,message:"User does not exists"})
+  } catch (error) {
+    console.log(error)
+    res.send({statusCode:400,message:"Internal Server Error",error})
+  }
+})
+
+ //Update Cordi by Cordi
+ router.get('/getUpCordiData/:id',async(req,res)=>{
+  try {
+    let user = await usersModel.findOne({_id:mongodb.ObjectId(req.params.id)})
+    // console.log(user)
+    if(user)
+    {
+      
+      res.send(user)
+      }
+    else
+      res.send({statusCode:400,message:"User does not exists"})
+  } catch (error) {
+    console.log(error)
+    res.send({statusCode:400,message:"Internal Server Error",error})
+  }
+})
+
+router.put('/updateCordi/:id',async(req,res)=>{
+  try {
+    let user = await usersModel.findOne({_id:mongodb.ObjectId(req.params.id)})
+    // console.log(user)
+    if(user)
+    {   
+       user.firstName =req.body.firstName
+      user.lastName =req.body.lastName
+      user.mobileNumber =req.body.mobileNumber
+      user.role =req.body.role
+      user.email =req.body.email
+      user.batch =req.body.batch
+
+      await user.save()
+      res.send({statusCode:200,message:"User data saved successfully"})
+      }
+    else
+      res.send({statusCode:400,message:"User does not exists"})
+  } catch (error) {
+    console.log(error)
+    res.send({statusCode:400,message:"Internal Server Error",error})
+  }
+})
+
 
 module.exports = router;
